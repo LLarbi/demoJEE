@@ -25,6 +25,7 @@
                     <div class="card-body">
                         <h5 class="card-title">${pastry.name}</h5>
                         <p class="card-text">${pastry.description}</p>
+                        <a href="${pageContext.request.contextPath}/pastries/delete?id=${pastry.id}" class="btn btn-primary stretched-link">Delete</a>
                     </div>
                 </div>
             </c:forEach>

@@ -51,8 +51,22 @@ public class PastryJpaDao implements PastryDao{
 
     @Override
     public Optional<Pastry> get(Long id) {
-
-        return Optional.empty();
+        Optional<Pastry> result = Optional.empty();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(("PU"));
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        try {
+            result = Optional.of(em.find(Pastry.class, id));
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return result;
     }
 
 
@@ -63,6 +77,20 @@ public class PastryJpaDao implements PastryDao{
 
     @Override
     public void delete(Pastry pastry) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(("PU"));
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        try {
+            em.remove(em.contains(pastry) ? pastry : em.merge(pastry));
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
 
     }
 }
