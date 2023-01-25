@@ -23,7 +23,7 @@
                 <input type="text" name="username" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div class="input-group mb-3">
-                <input type="submit" class="""btn btn-primary">
+                <input type="submit" class="""git btn btn-primary">
             </div>
         </form>
         <c:if test="${USER_ADDED_OK}">

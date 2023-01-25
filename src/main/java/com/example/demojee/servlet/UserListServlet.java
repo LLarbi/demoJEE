@@ -1,7 +1,7 @@
 package com.example.demojee.servlet;
 
 import com.example.demojee.dao.MemoryDao;
-import com.example.demojee.entity.User;
+import com.example.demojee.dao.entity.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

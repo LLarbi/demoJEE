@@ -1,6 +1,6 @@
 package com.example.demojee.dao;
 
-import com.example.demojee.entity.User;
+import com.example.demojee.dao.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
