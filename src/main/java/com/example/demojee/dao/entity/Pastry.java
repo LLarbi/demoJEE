@@ -14,16 +14,15 @@ public class Pastry {
     private String description;
     private String image;
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public Pastry() {
 
+    }
+
+    public Pastry(String name, String description, String image) {
+        this.name = name;
+        this.description = description;
+        this.image = image;
     }
 
     public Long getId() {
@@ -48,5 +47,13 @@ public class Pastry {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -32,7 +32,21 @@ public class PastryJpaDao implements PastryDao{
 
     @Override
     public void save(Pastry pastry) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(("PU"));
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
 
+        et.begin();
+        try {
+            em.persist(pastry);
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
     }
 
     @Override
