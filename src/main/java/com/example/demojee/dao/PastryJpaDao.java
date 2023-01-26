@@ -31,6 +31,28 @@ public class PastryJpaDao implements PastryDao{
     }
 
     @Override
+    public List<Pastry> getByName(String name) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(("PU"));
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        List<Pastry> pastries = new ArrayList<>();
+        et.begin();
+        try {
+            TypedQuery<Pastry> pastryQuery = em.createQuery("SELECT p FROM Pastry p WHERE p.name LIKE :name", Pastry.class);
+            pastryQuery.setParameter("name", "%" + name + "%");
+            pastries = pastryQuery.getResultList();
+            et.commit();
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return pastries;
+    }
+
+    @Override
     public void save(Pastry pastry) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(("PU"));
         EntityManager em = emf.createEntityManager();

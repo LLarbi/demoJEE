@@ -17,8 +17,15 @@ public class PastryListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String search = req.getParameter("search");
         PastryDao dao = DaoFactory.getPastryDao();
-        List<Pastry> pastryList = dao.getAll();
+        List<Pastry> pastryList;
+
+        if ( search != null ) {
+            pastryList = dao.getByName(search);
+        } else {
+            pastryList = dao.getAll();
+        }
 
         req.setAttribute("pastries", pastryList);
 
